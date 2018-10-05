@@ -1,0 +1,50 @@
+<div class="main user-show">
+  <div class="container">
+    <div class="user">
+      <img src="<%= "/user_images/#{@user.image_name}" %>">
+      <h2><%= @user.name %></h2>
+      <p><%= @user.email %></p>
+      <% if @user.id == @current_user.id %>
+        <%= link_to("Edit", "/users/#{@user.id}/edit") %>
+      <% else %>
+      <div class="follow_form">
+        <% if @current_user.following?(@user) %>
+          <%=link_to("Unfollow","/relationships/#{@user.id}/destroy", {method: "post"})%>
+        <% else %>
+          <%=link_to("Follow","/relationships/#{@user.id}/create", {method: "post"})%>
+        <% end %>
+      </div>
+      <% end %>
+    </div>
+
+    <ul class="user-tabs">
+      <li>
+        <%= link_to("Posts #{@posts_count}", "/users/#{@user.id}") %>
+      </li>
+      <li class="active">
+        <%= link_to("Likes #{@likes_count}", "/users/#{@user.id}/likes") %>
+      </li>
+      <li>
+        <%= link_to("Following #{@following_count}", "/users/#{@user.id}/following") %>
+      </li>
+      <li>
+        <%= link_to("Followers #{@followers_count}", "/users/#{@user.id}/followers") %>
+      </li>
+    </ul>
+
+    <% @likes.each do |like|%>
+      <%post=Post.find_by(id: like.post_id) %>
+      <div class="posts-index-item">
+        <div class="post-left">
+          <img src="<%= "/user_images/#{post.user.image_name}" %>">
+        </div>
+        <div class="post-right">
+          <div class="post-user-name">
+            <%= link_to(post.user.name, "/users/#{post.user.id}") %>
+          </div>
+          <%= link_to(post.content, "/posts/#{post.id}") %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
