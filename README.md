@@ -1,3 +1,5 @@
+Yuritter is a web application which works like Twitter created by Yuri for self-study.
+
 # README
 
 This README would normally document whatever steps are necessary to get the
