@@ -1,4 +1,4 @@
-Yuritter is a web application which works like Twitter created by Yuri for self-study.
+Yuritter is a web application which works like Twitter created by Yuri for self-study.git
 
 # README
 

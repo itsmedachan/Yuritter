@@ -1,0 +1,46 @@
+<header>
+  <div class="header-logo">
+    <% if @current_user %>
+      <%= link_to("Yuritter", "/posts/index") %>
+    <% else %>
+      <%= link_to("Yuritter", "/") %>
+    <% end %>
+  </div>
+  
+  <ul class="header-menus">
+    <%if @current_user %>
+    <li>
+      <%=link_to(@current_user.name,"/users/#{@current_user.id}")%>
+    </li>
+    <li>
+      <%=link_to("Home","/posts/index")%>
+    </li>
+    <li>
+      <%=link_to("New Post","/posts/new")%>
+    </li>
+    <li>
+      <%=link_to("Users","/users/index")%>
+    </li>
+    <li>
+      <%=link_to("Log out","/logout",{method: "post"})%>
+    </li>
+    <%else%>
+    <li>
+      <%=link_to("About", "/about")%>
+    </li>
+    <li>
+      <%=link_to("Sign up","/signup")%>
+    </li>
+    <li>
+      <%=link_to("Log in","/login")%>
+    </li>
+    <%end%>
+  </ul>
+
+  <% if flash[:notice]%>
+    <div class="flash">
+    <%=flash[:notice] %>
+    </div>
+  <% end %>
+
+</header>

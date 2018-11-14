@@ -1,63 +1,14 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Yuritter</title>
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
-
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-
+    <title><%=full_title(yield(:title))%></title>
+    <%= render 'layouts/rails_default' %>
+    <%= render 'layouts/shim' %>
   </head>
 
   <body>
-    <header>
-      <div class="header-logo">
-        <% if @current_user %>
-          <%= link_to("Yuritter", "/posts/index") %>
-        <% else %>
-          <%= link_to("Yuritter", "/") %>
-        <% end %>
-      </div>
-      <ul class="header-menus">
-        <%if @current_user %>
-        <li>
-          <%=link_to(@current_user.name,"/users/#{@current_user.id}")%>
-        </li>
-        <li>
-          <%=link_to("Home","/posts/index")%>
-        </li>
-        <li>
-          <%=link_to("New Post","/posts/new")%>
-        </li>
-        <li>
-          <%=link_to("Users","/users/index")%>
-        </li>
-        <li>
-          <%=link_to("Log out","/logout",{method: "post"})%>
-        </li>
-        <%else%>
-        <li>
-          <%=link_to("About", "/about")%>
-        </li>
-        <li>
-          <%=link_to("Sign up","/signup")%>
-        </li>
-        <li>
-          <%=link_to("Log in","/login")%>
-        </li>
-        <%end%>
-      </ul>
+    <%=render 'layouts/header'%>
 
-      <% if flash[:notice]%>
-      <div class="flash">
-        <%=flash[:notice] %>
-      </div>
-    <% end %>
-
-    </header>
     <%= yield %>
   </body>
 </html>
