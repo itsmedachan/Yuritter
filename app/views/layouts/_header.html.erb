@@ -3,10 +3,11 @@
     <% if @current_user %>
       <%= link_to("Yuritter", "/posts/index") %>
     <% else %>
-      <%= link_to("Yuritter", "/") %>
+      <%= link_to "Yuritter",root_path%>
+      <%# <%= link_to("Yuritter", "/") %>
     <% end %>
   </div>
-  
+
   <ul class="header-menus">
     <%if @current_user %>
     <li>
@@ -26,13 +27,16 @@
     </li>
     <%else%>
     <li>
-      <%=link_to("About", "/about")%>
+      <%=link_to "About",about_path%>
+      <%# <%=link_to("About", "/about")%>
     </li>
     <li>
-      <%=link_to("Sign up","/signup")%>
+      <%=link_to "Sign up",signup_path%>
+      <%# <%=link_to("Sign up","/signup")%>
     </li>
     <li>
-      <%=link_to("Log in","/login")%>
+      <%=link_to "Log in","#"%>
+      <%# <%=link_to("Log in","/login")%>
     </li>
     <%end%>
   </ul>

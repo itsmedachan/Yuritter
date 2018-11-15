@@ -5,7 +5,9 @@ Rails.application.routes.draw do
   post 'likes/:post_id/create' => "likes#create"
   post 'likes/:post_id/destroy' => "likes#destroy"
 
-  get 'signup' => "users#new"
+  get '/signup', to:'users#new'
+  #get 'signup' => "users#new"
+
   get 'login' => "users#login_form"
   post 'login' => "users#login"
   post 'logout' => "users#logout"
@@ -29,7 +31,7 @@ Rails.application.routes.draw do
   root 'home#top'
   #get '/' => "home#top"
 
-  get '/about', to:'home#about'
+  get '/about', to:'home#about'#, as:'about'
   #get 'about', to:'home#about'
   #get '/about' => 'home#about'
   #get 'about' => "home#about"
