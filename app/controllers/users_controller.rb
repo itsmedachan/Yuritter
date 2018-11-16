@@ -9,7 +9,8 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user=User.find_by(id: params[:id])
+    @user=User.find(params[:id])
+    #@user=User.find_by(id: params[:id])
     @posts_count=Post.where(user_id: @user.id).count
     @likes_count=Like.where(user_id: @user.id).count
     @following_count=@user.following.count
@@ -21,17 +22,23 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user=User.new(
-      name: params[:name],
-      email: params[:email],
-      image_name: "kari_icon.jpg",
-      password: params[:password])
+    @user=User.new(user_params) #privateメソッド(下で定義)
+    # @user=User.new(params[:user])
+      #paramsハッシュをまるごと渡す(全体を初期化する)のはセキュリティ上危険なためRailsはデフォルトでエラーを返す
+    # @user=User.new(
+    #   name: params[:name],
+    #   email: params[:email],
+    #   image_name: "kari_icon.jpg",
+    #   password: params[:password])
     if @user.save
       session[:user_id]=@user.id
       flash[:notice]="Welcome to Yuritter!"
-      redirect_to("/users/#{@user.id}")
+      redirect_to @user
+      #redirect_to user_url(@user)
+      #redirect_to("/users/#{@user.id}")
     else
-      render("users/new")
+      render 'new'
+      #render("users/new")
     end
   end
 
@@ -116,5 +123,10 @@ class UsersController < ApplicationController
     end
   end
 
+
+ private
+  def user_params
+    params.require(:user).permit(:name, :email, :password, :password_confirmation)
+  end
 
 end

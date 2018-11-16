@@ -7,16 +7,18 @@ Rails.application.routes.draw do
 
   get '/signup', to:'users#new'
   #get 'signup' => "users#new"
+  post '/signup', to:'users#create'
 
   get 'login' => "users#login_form"
   post 'login' => "users#login"
   post 'logout' => "users#logout"
 
-  get 'users/index' => "users#index"
-  post 'users/create' => "users#create"
-  get 'users/:id' => "users#show"
-  get 'users/:id/edit' => "users#edit"
-  post 'users/:id/update' => "users#update"
+  resources :users
+  #get 'users/index' => "users#index"
+  #post 'users/create' => "users#create"
+  #get 'users/:id' => "users#show"
+  #get 'users/:id/edit' => "users#edit"
+  #post 'users/:id/update' => "users#update"
   get 'users/:id/likes' => "users#likes"
   #get 'users/:id/following' => "users#following"
 
@@ -39,11 +41,11 @@ Rails.application.routes.draw do
 
 
 
-  resources :users do
-    member do
-     get :following, :followers
-     end
-  end
+  # resources :users do
+  #   member do
+  #    get :following, :followers
+  #    end
+  # end
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
