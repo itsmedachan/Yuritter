@@ -1,7 +1,5 @@
 class User < ApplicationRecord
 
-  has_secure_password
-
   has_many :posts
 
   has_many :active_relationships, class_name:"Relationship", foreign_key:"follower_id", dependent: :destroy
@@ -10,9 +8,18 @@ class User < ApplicationRecord
   has_many :following, through: :active_relationships, source: :following
   has_many :followers, through: :passive_relationships, source: :follower
 
-  validates :name, {presence: true}
-  validates :email, {presence: true, uniqueness: true}
-  #validates :password, {presence: true}
+  validates :name, presence: true, length:{maximum:50}
+  #validates :name, {presence: true} #{}省略可
+
+  before_save {self.email=email.downcase}
+  #before_save {self.email=self.email.downcase} #右辺のself省略可
+  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
+  validates :email, presence: true, uniqueness:{case_sensitive:false},
+                    length:{maximum:255}, format:{with:VALID_EMAIL_REGEX}
+  #validates :email, {presence: true, uniqueness: true}
+
+  has_secure_password
+  validates :password, presence: true, length:{minimum:4}
 
   def posts
     return Post.where(user_id: self.id)
