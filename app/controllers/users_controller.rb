@@ -13,8 +13,8 @@ class UsersController < ApplicationController
     #@user=User.find_by(id: params[:id])
     @posts_count=Post.where(user_id: @user.id).count
     @likes_count=Like.where(user_id: @user.id).count
-    @following_count=@user.following.count
-    @followers_count=@user.followers.count
+    #@following_count=@user.following.count
+    #@followers_count=@user.followers.count
   end
 
   def new
@@ -23,6 +23,7 @@ class UsersController < ApplicationController
 
   def create
     @user=User.new(user_params) #privateメソッド(下で定義)
+    @user.image_name= "kari_icon.jpg"
     # @user=User.new(params[:user])
       #paramsハッシュをまるごと渡す(全体を初期化する)のはセキュリティ上危険なためRailsはデフォルトでエラーを返す
     # @user=User.new(
@@ -44,7 +45,7 @@ class UsersController < ApplicationController
   end
 
   def edit
-    @user=User.find_by(id: params[:id])
+    @user=User.find(params[:id])
   end
 
   def update
@@ -95,8 +96,8 @@ class UsersController < ApplicationController
     @likes=Like.where(user_id: @user.id)
     @posts_count=Post.where(user_id: @user.id).count
     @likes_count=Like.where(user_id: @user.id).count
-    @following_count=@user.following.count
-    @followers_count=@user.followers.count
+    #@following_count=@user.following.count
+    #@followers_count=@user.followers.count
   end
 
   def following
@@ -104,8 +105,8 @@ class UsersController < ApplicationController
     @users=@user.following
     @posts_count=Post.where(user_id: @user.id).count
     @likes_count=Like.where(user_id: @user.id).count
-    @following_count=@user.following.count
-    @followers_count=@user.followers.count
+    #@following_count=@user.following.count
+    #@followers_count=@user.followers.count
   end
 
   def followers
@@ -113,8 +114,8 @@ class UsersController < ApplicationController
     @users=@user.followers
     @posts_count=Post.where(user_id: @user.id).count
     @likes_count=Like.where(user_id: @user.id).count
-    @following_count=@user.following.count
-    @followers_count=@user.followers.count
+    #@following_count=@user.following.count
+    #@followers_count=@user.followers.count
   end
 
 

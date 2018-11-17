@@ -1,0 +1,20 @@
+<div class="user">
+  <img src="<%="/user_images/#{@user.image_name}"%>">
+  <h2><%= @user.name %></h2>
+  <%# <% unless current_user?(@user) %>
+  <% if @user.id==@current_user.id %>
+    <%# <%=link_to "Edit", edit_user_path%>
+    <%# <%=link_to("Edit","/users/#{@user.id}/edit")%>
+  <% else %>
+    <div class="follow_form">
+      <% if @current_user.following?(@user) %>
+        <%#render 'unfollow'%>
+        <%=link_to "Unfollow", relationship_path, method: :delete%>
+        <%#<%=link_to("Unfollow","/relationships/#{@user.id}/destroy", {method: "post"})%>
+      <% else %>
+        <%# <%=link_to "Follow", relationships_path, method: :post%>
+        <%=link_to("Follow","/relationships/#{@user.id}/create", {method: "post"})%>
+      <% end %>
+    </div>
+  <% end %>
+</div>

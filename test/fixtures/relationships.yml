@@ -2,8 +2,8 @@
 
 one:
   follower_id: 1
-  following_id: 2
+  followed_id: 2
 
 two:
   follower_id: 2
-  following_id: 1
+  followed_id: 1

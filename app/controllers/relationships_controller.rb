@@ -3,23 +3,29 @@ class RelationshipsController < ApplicationController
   before_action :authenticate_user
 
     def create
-      @relationship=Relationship.new(
-        follower_id: @current_user.id,
-        following_id: params[:id]
-      )
-      @relationship.save
+      user = User.find(params[:followed_id])
+      current_user.follow(user)
+      redirect_to user
+      # @relationship=Relationship.new(
+      #   follower_id: @current_user.id,
+      #   followed_id: params[:id]
+      # )
+      # @relationship.save
       flash[:notice]="Followed!"
-      redirect_to("/users/#{params[:id]}")
+      # redirect_to("/users/#{params[:id]}")
     end
 
 
     def destroy
-      @relationship=Relationship.find_by(
-        follower_id: @current_user.id,
-        following_id: params[:id]
-      )
-      @relationship.destroy
-      redirect_to("/users/#{params[:id]}")
+      user = Relationship.find(params[:id]).followed
+      # @relationship=Relationship.find_by(
+      #   follower_id: @current_user.id,
+      #   followed_id: params[:id]
+      # )
+      current_user.unfollow(user)
+      # @relationship.destroy
+      redirect_to user
+      # redirect_to("/users/#{params[:id]}")
     end
 
 #   private

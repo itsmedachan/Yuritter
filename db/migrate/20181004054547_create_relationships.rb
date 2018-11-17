@@ -1,3 +1,4 @@
+#following_idはfollowed_idに変更済み
 class CreateRelationships < ActiveRecord::Migration[5.2]
   def change
     create_table :relationships do |t|
@@ -8,6 +9,7 @@ class CreateRelationships < ActiveRecord::Migration[5.2]
     end
     add_index :relationships, :follower_id
     add_index :relationships, :following_id
+    #あるユーザーが同じユーザーを2回フォローすることを防ぐ
     add_index :relationships, [:follower_id, :following_id], unique: true
   end
 end
