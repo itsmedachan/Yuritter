@@ -31,10 +31,11 @@ class UsersController < ApplicationController
     #   image_name: "kari_icon.jpg",
     #   password: params[:password])
     if @user.save
-      session[:user_id]=@user.id
+      log_in @user
+      #session[:user_id]=@user.id
       flash[:notice]="Welcome to Yuritter!"
       redirect_to @user
-      #redirect_to user_url(@user)
+      #redirect_to user_url(@user) #と等価
       #redirect_to("/users/#{@user.id}")
     else
       render 'new'
@@ -63,29 +64,31 @@ class UsersController < ApplicationController
     end
   end
 
-  def login_form
-    #@user=User.find_by(email: params[:email], password: params[:password])
-  end
+  #sessionsのnewアクションに移行
+  # def login_form
+  # end
 
-  def login
-    @user=User.find_by(email: params[:email])
-    if @user && @user.authenticate(params[:password])
-      session[:user_id]=@user.id
-      flash[:notice]="login successfully"
-      redirect_to("/posts/index")
-    else
-      @error_message="Invalid login, please try again."
-      @email=params[:email]
-      @password=params[:password]
-      render("users/login_form")
-    end
-  end
+  #sessionsのcreateアクションに移行
+  # def login
+  #   @user=User.find_by(email: params[:email])
+  #   if @user && @user.authenticate(params[:password])
+  #     session[:user_id]=@user.id
+  #     flash[:notice]="login successfully"
+  #     redirect_to("/posts/index")
+  #   else
+  #     @error_message="Invalid login, please try again."
+  #     @email=params[:email]
+  #     @password=params[:password]
+  #     render("users/login_form")
+  #   end
+  # end
 
-  def logout
-    session[:user_id]=nil
-    flash[:notice]="logout successfully"
-    redirect_to("/login")
-  end
+  #sessionsのdestroyアクションに移行
+  # def logout
+  #   session[:user_id]=nil
+  #   flash[:notice]="logout successfully"
+  #   redirect_to("/login")
+  # end
 
   def likes
     @user=User.find_by(id: params[:id])

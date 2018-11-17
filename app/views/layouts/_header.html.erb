@@ -9,9 +9,13 @@
   </div>
 
   <ul class="header-menus">
-    <%if @current_user %>
+    <%# SessionsHelperで自分で定義したlogged_inメソッド %>
+    <% if logged_in? %>
+    <%# if @current_user %>
     <li>
-      <%=link_to(@current_user.name,"/users/#{@current_user.id}")%>
+      <%# SessionsHelperで自分で定義したcurrent_userメソッド %>
+      <%=link_to "#{current_user.name}", current_user%>
+      <%# <%=link_to(@current_user.name,"/users/#{@current_user.id}")%>
     </li>
     <li>
       <%=link_to("Home","/posts/index")%>
@@ -23,19 +27,20 @@
       <%=link_to("Users","/users/index")%>
     </li>
     <li>
-      <%=link_to("Log out","/logout",{method: "post"})%>
+      <%=link_to "Log out", logout_path, method: :delete%>
+      <%#=link_to("Log out","/logout",{method: "post"})%>
     </li>
     <%else%>
     <li>
-      <%=link_to "About",about_path%>
+      <%=link_to "About", about_path%>
       <%# <%=link_to("About", "/about")%>
     </li>
     <li>
-      <%=link_to "Sign up",signup_path%>
+      <%=link_to "Sign up", signup_path%>
       <%# <%=link_to("Sign up","/signup")%>
     </li>
     <li>
-      <%=link_to "Log in","#"%>
+      <%=link_to "Log in", login_path%>
       <%# <%=link_to("Log in","/login")%>
     </li>
     <%end%>

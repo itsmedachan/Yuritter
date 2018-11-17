@@ -38,6 +38,8 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
     assert_template 'users/show'
     assert_not flash.nil?
     #assert_not flash.empty? #nil?とempty?の違いはググれ
+    #ログインするか
+    assert is_logged_in?
   end
-  #こういうのをend to endなテスト(統合テスト)と言う？
+  #こういうのをend to endなテスト(統合テスト)と言う
 end

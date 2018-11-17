@@ -1,6 +1,12 @@
 class ApplicationController < ActionController::Base
-  before_action :set_current_user
+  #CSRF対策
+  protect_from_forgery with: :exception
 
+  #どのcontrollerからでもsession用helperを使えるようにする
+  include SessionsHelper
+
+
+  before_action :set_current_user
   def set_current_user
     @current_user=User.find_by(id: session[:user_id])
   end
@@ -18,5 +24,5 @@ class ApplicationController < ActionController::Base
       redirect_to("/posts/index")
     end
   end
-  
+
 end
