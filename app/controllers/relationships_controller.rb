@@ -17,15 +17,15 @@ class RelationshipsController < ApplicationController
 
 
     def destroy
-      user = Relationship.find(params[:id]).followed
-      # @relationship=Relationship.find_by(
-      #   follower_id: @current_user.id,
-      #   followed_id: params[:id]
-      # )
-      current_user.unfollow(user)
-      # @relationship.destroy
-      redirect_to user
-      # redirect_to("/users/#{params[:id]}")
+      #user = Relationship.find(params[:id]).followed
+       @relationship=Relationship.find_by(
+         follower_id: @current_user.id,
+         followed_id: params[:id]
+       )
+      #current_user.unfollow(user)
+      @relationship.destroy
+      #redirect_to user
+      redirect_to("/users/#{params[:id]}")
     end
 
 #   private

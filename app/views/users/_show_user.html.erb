@@ -4,7 +4,7 @@
   <%# <% unless current_user?(@user) %>
   <% if @user.id==@current_user.id %>
     <%# <%=link_to "Edit", edit_user_path%>
-    <%# <%=link_to("Edit","/users/#{@user.id}/edit")%>
+    <%=link_to("Edit","/users/#{@user.id}/edit")%>
   <% else %>
     <div class="follow_form">
       <% if @current_user.following?(@user) %>
