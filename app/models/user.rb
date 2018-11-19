@@ -2,6 +2,10 @@ class User < ApplicationRecord
 
   #User has_many posts. Userが削除されたらpostsも削除される。
   has_many :posts, dependent: :destroy
+
+  #User has_many likes, Userが削除されたらlikesも削除される。
+  has_many :likes, dependent: :destroy
+
   #Userが他のUserをフォローする(能動的関係)。Relationshipクラスのfollower_idを外部キーとする。follower_idが削除されたらこの関係も削除される。
   has_many :active_relationships, class_name:"Relationship", foreign_key:"follower_id", dependent: :destroy
   #Userが他のUserにフォローされる(受動的関係)。Relationshipクラスのfollowed_idを外部キーとする。followed_idが削除されたらこの関係も削除される。

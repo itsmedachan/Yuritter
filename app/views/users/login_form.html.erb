@@ -10,6 +10,7 @@
             <%= @error_message %>
           </div>
         <% end %>
+
         <%=form_tag("/login") do%>
         <p>Email address</p>
         <input name="email" value="<%= @email%>">
@@ -17,6 +18,7 @@
         <input type="password" name="password" value="<%= @password%>">
         <input type="submit" value="Log in">
         <%end%>
+        
       </div>
     </div>
   </div>

@@ -4,6 +4,7 @@ class RelationshipsController < ApplicationController
 
     def create
       user = User.find(params[:followed_id])
+      #user.rbで定義したfollowメソッドが使える
       current_user.follow(user)
       redirect_to user
       # @relationship=Relationship.new(
@@ -17,14 +18,13 @@ class RelationshipsController < ApplicationController
 
 
     def destroy
-      #user = Relationship.find(params[:id]).followed
-       @relationship=Relationship.find_by(
+      # user = Relationship.find(params[:id]).followed
+      # current_user.unfollow(user)
+      @relationship=Relationship.find_by(
          follower_id: @current_user.id,
          followed_id: params[:id]
-       )
-      #current_user.unfollow(user)
+      )
       @relationship.destroy
-      #redirect_to user
       redirect_to("/users/#{params[:id]}")
     end
 

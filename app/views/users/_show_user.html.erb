@@ -1,12 +1,14 @@
 <div class="user">
   <img src="<%="/user_images/#{@user.image_name}"%>">
   <h2><%= @user.name %></h2>
+  <p><%=@user.email%></p>
   <%# <% unless current_user?(@user) %>
   <% if @user.id==@current_user.id %>
     <%# <%=link_to "Edit", edit_user_path%>
-    <%=link_to("Edit","/users/#{@user.id}/edit")%>
+    <%# <%=link_to("Edit","/users/#{@user.id}/edit")%>
   <% else %>
     <div class="follow_form">
+      <%# user.rbで定義したfollowing?メソッド %>
       <% if @current_user.following?(@user) %>
         <%#render 'unfollow'%>
         <%=link_to "Unfollow", relationship_path, method: :delete%>

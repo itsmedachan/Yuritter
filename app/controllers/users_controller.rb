@@ -1,7 +1,9 @@
 class UsersController < ApplicationController
 
+  #application_controllerで定義したメソッド
   before_action :authenticate_user, {only: [:index, :show, :edit, :update]}
   before_action :forbid_login_user, {only: [:new, :create, :login_form, :login]}
+  #このファイルで定義したメソッド
   before_action :ensure_correct_user, {only: [:edit, :update]}
 
   def index
@@ -47,6 +49,36 @@ class UsersController < ApplicationController
   def edit
     @user=User.find(params[:id])
   end
+
+  # def update
+  #   if @user.update_attributes(user_params)
+  #     flash[:success] = "Profile updated"
+  #     redirect_to @user
+  #   else
+  #     render 'edit'
+  #   end
+  # end
+  
+  # def update
+  #   @user=User.find_by(id: params[:id])
+  #   @user.update_attributes(
+  #     name: params[:name],
+  #     email: params[:email]
+  #   )
+  #   if params[:image]
+  #     @user.update_attributes(image_name: "#{@user.id}.jpg")
+  #     image=params[:image]
+  #     File.binwrite("public/user_images/#{@user.image_name}", image.read)
+  #   end
+  #
+  #   if @user.save
+  #     flash[:notice]="edited!"
+  #     redirect_to("/users/#{@user.id}")
+  #   else
+  #     render("users/edit")
+  #   end
+  #
+  # end
 
   def update
     @user=User.find_by(id: params[:id])
