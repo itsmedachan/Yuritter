@@ -4,6 +4,7 @@ class SessionsController < ApplicationController
 
   def create
     user = User.find_by(email: params[:session][:email].downcase)
+    #authenticateメソッドはhas_secure_passwordを追加したから使える
     if user && user.authenticate(params[:session][:password])
       #log_inはsession helperで自分で定義したメソッド
       log_in user
